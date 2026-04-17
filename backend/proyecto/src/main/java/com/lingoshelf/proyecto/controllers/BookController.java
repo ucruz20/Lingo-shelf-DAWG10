@@ -67,7 +67,7 @@ public class BookController {
             content = @Content(
                 mediaType = "application/json",
                 examples = @ExampleObject(
-                    value = "{\"isbn\":\"9781234567890\",\"price\":19.99,\"mcer\":\"B2\",\"category\":\"Novela\",\"title\":\"Libro base\",\"translations\":[{\"languageCode\":\"es\",\"title\":\"Libro base\",\"description\":\"Descripcion en espanol\"}]}"
+                    value = "{\"isbn\":\"9780060929794\",\"price\":19.99,\"author\":\"Gabriel García Márquez\",\"category\":\"Novela\",\"publishedDate\":\"1967-06-05\",\"translations\":[]}"
                 )
             )
         )
