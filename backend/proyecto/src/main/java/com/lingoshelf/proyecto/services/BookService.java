@@ -1,6 +1,5 @@
 package com.lingoshelf.proyecto.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,21 +28,21 @@ public class BookService {
 
         return books.stream().map(b -> {
             List<BookTranslation> translations = b.getTranslations();
-            if (translations == null || translations.isEmpty()) {
-                return new BookResponse(b.getId(), b.getTitle(), b.getPrice());
-            }
-
             BookTranslation trans = translations.stream()
                     .filter(t -> lang != null && lang.equals(t.getLanguageCode()))
                     .findFirst()
                     .orElse(translations.get(0));
 
-            return new BookResponse(b.getId(), trans.getTitle(), b.getPrice());
+            return new BookResponse(b.getId(), trans.getTitle(), trans.getDescription(), b.getPrice());
         }).collect(Collectors.toList());
     }
 
     @Transactional
     public BookResponse createBook(BookRequest request) {
+        if (request.getTranslations().isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Libro debe contener por lo menos una traducción");
+        }
+
         Book book = new Book();
         applyRequestToBook(book, request);
 
@@ -81,38 +80,35 @@ public class BookService {
 
     private void applyRequestToBook(Book book, BookRequest request) {
         book.setIsbn(request.getIsbn());
+        book.setAuthor(request.getAuthor());
+        book.setPublishedDate(request.getPublishedDate());
         book.setPrice(request.getPrice());
-        book.setMcer(request.getMcer());
         book.setCategory(request.getCategory());
-        book.setTitle(request.getTitle());
 
-        List<BookTranslation> newTranslations = request.getTranslations() == null
-                ? List.of()
-                : request.getTranslations().stream()
-                        .map(t -> {
-                            BookTranslation translation = new BookTranslation();
-                            translation.setBook(book);
-                            translation.setLanguageCode(t.getLanguageCode());
-                            translation.setTitle(t.getTitle());
-                            translation.setDescription(t.getDescription());
-                            return translation;
-                        })
-                        .collect(Collectors.toList());
-
-        if (book.getTranslations() == null) {
-            book.setTranslations(new ArrayList<>());
-        } else {
-            book.getTranslations().clear();
-        }
+        List<BookTranslation> newTranslations = request.getTranslations().stream()
+            .map(t -> {
+                BookTranslation translation = new BookTranslation();
+                translation.setBook(book);
+                translation.setLanguageCode(t.getLanguageCode());
+                translation.setTitle(t.getTitle());
+                translation.setDescription(t.getDescription());
+                translation.setCefrLevel(t.getCefrLevel());
+                return translation;
+            })
+            .collect(Collectors.toList());
         book.getTranslations().addAll(newTranslations);
     }
 
     private BookResponse toBookResponse(Book book) {
-        String responseTitle = book.getTitle();
-        if (book.getTranslations() != null && !book.getTranslations().isEmpty()) {
-            responseTitle = book.getTranslations().get(0).getTitle();
-        }
-        return new BookResponse(book.getId(), responseTitle, book.getPrice());
+        if (book.getTranslations() == null | book.getTranslations().isEmpty())
+            return null;
+
+        return new BookResponse(
+            book.getId(),
+            book.getTranslations().get(0).getTitle(),
+            book.getTranslations().get(0).getDescription(),
+            book.getPrice()
+        );
     }
 }
 
