@@ -1,0 +1,288 @@
+.books-page {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  width: min(100% - 32px, 1024px);
+  margin: 0 auto;
+  padding: 24px 0;
+}
+
+.books-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-name {
+  margin: 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+}
+
+.books-toolbar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
+  gap: 15px;
+  width: 100%;
+}
+
+.search-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  width: 100%;
+}
+
+.search-input {
+  flex: 1 1 220px;
+  min-width: 0;
+  padding: 10px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.search-input:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.books-list {
+  display: grid;
+  gap: 8px;
+}
+
+.book-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  background: #ffffff;
+  padding: 12px 18px;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.08);
+}
+
+.book-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.book-title,
+.book-price {
+  margin: 0;
+}
+
+.book-title {
+  overflow-wrap: anywhere;
+}
+
+.book-price {
+  color: #4b5563;
+}
+
+.books-empty {
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  background: #ffffff;
+  border-radius: 8px;
+  color: #4b5563;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.modal-content {
+  width: min(100%, 560px);
+  max-height: 85vh;
+  overflow-y: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-error {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border: 1px solid #fecaca;
+  border-radius: 6px;
+  background: #fef2f2;
+  color: #b91c1c;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.form-group label {
+  font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group textarea {
+  min-height: 88px;
+  resize: vertical;
+}
+
+.translation-block {
+  background: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-left: 4px solid #007bff;
+}
+
+.modal-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.btn-search {
+  background-color: #dddddd;
+}
+
+.btn-search:hover {
+  background-color: #bbbbbb;
+}
+
+.btn-create {
+  background-color: #10b981;
+  color: #ffffff;
+}
+
+.btn-create:hover {
+  background-color: #059669;
+  box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2);
+}
+
+.btn-edit,
+.btn-save {
+  background-color: #3b82f6;
+  color: #ffffff;
+}
+
+.btn-edit {
+  flex: 0 0 auto;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+}
+
+.btn-edit:hover,
+.btn-save:hover {
+  background-color: #2563eb;
+  box-shadow: 0 4px 6px rgba(59, 130, 246, 0.2);
+}
+
+.btn-cancel,
+.btn-clear {
+  background-color: #f3f4f6;
+  color: #4b5563;
+  border: 1px solid #e5e7eb;
+  box-shadow: none;
+}
+
+.btn-cancel {
+  margin-left: auto;
+}
+
+.btn-cancel:hover,
+.btn-clear:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+}
+
+.btn-delete {
+  background-color: #f3f4f6;
+  color: #e02828;
+  border: 2px dashed #eb1515;
+  box-shadow: none;
+}
+
+.btn-delete:hover {
+  background-color: #eb1515;
+  color: #ffffff;
+}
+
+.btn-secondary {
+  display: flex;
+  width: 100%;
+  margin: 10px 0;
+  background-color: transparent;
+  color: #4b5563;
+  border: 2px dashed #d1d5db;
+  box-shadow: none;
+}
+
+.btn-secondary:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+  color: #1f2937;
+}
+
+@media (min-width: 620px) {
+  .books-toolbar {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .search-form {
+    flex: 1;
+    max-width: 560px;
+  }
+
+  .btn-create {
+    margin-left: auto;
+  }
+
+  .book-info {
+    flex-direction: row;
+    align-items: center;
+    padding-right: 25px;
+  }
+
+  .book-title {
+    flex: 1;
+  }
+
+  .form-group {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .form-group input {
+    flex: 1;
+    margin-left: 10px;
+  }
+
+  .form-group-with-textarea {
+    flex-direction: column;
+  }
+}
