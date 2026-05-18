@@ -9,3 +9,11 @@
 | 3 | Kennet Alonso Castro Siguenza | CS24010 |
 | 4 | Pablo Daniel Hurtado Cortez   | HC24019 |
 | 5 | Edwin Ulises Cruz Grijalva    | CG21038 |
+
+## Desarrollo
+
+Utilizar el siguiente comando para correr el frontend con docker
+```
+docker compose --profile front-dev up --watch
+```
+
