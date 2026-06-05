@@ -60,18 +60,6 @@ export default function BookEditorModal({
           {errorMessage && <p className="form-error">{errorMessage}</p>}
 
           <div className="form-group">
-            <label htmlFor="book-title">Titulo:</label>
-            <input
-              id="book-title"
-              type="text"
-              name="title"
-              value={formData.title}
-              onChange={handleFieldChange}
-              required
-            />
-          </div>
-
-          <div className="form-group">
             <label htmlFor="book-isbn">ISBN:</label>
             <input
               id="book-isbn"
@@ -84,12 +72,12 @@ export default function BookEditorModal({
           </div>
 
           <div className="form-group">
-            <label htmlFor="book-level">MCER:</label>
+            <label htmlFor="book-author">Autor:</label>
             <input
-              id="book-level"
+              id="book-author"
               type="text"
-              name="mcer"
-              value={formData.mcer}
+              name="author"
+              value={formData.author}
               onChange={handleFieldChange}
               required
             />
@@ -102,6 +90,18 @@ export default function BookEditorModal({
               type="text"
               name="category"
               value={formData.category}
+              onChange={handleFieldChange}
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="book-publishedDate">Fecha de Publicación:</label>
+            <input
+              id="book-publishedDate"
+              type="text"
+              name="published Date"
+              value={formData.publishedDate}
               onChange={handleFieldChange}
               required
             />
@@ -151,13 +151,24 @@ export default function BookEditorModal({
               </div>
 
               <div className="form-group form-group-with-textarea">
-                <label htmlFor={`translation-description-${index}`}>Descripcion:</label>
+                <label className="description-label" htmlFor={`translation-description-${index}`}>Descripcion:</label>
                 <textarea
                   id={`translation-description-${index}`}
                   value={translation.description}
                   onChange={(event) =>
                     handleTranslationChange(index, 'description', event.target.value)
                   }
+                  required
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor={`translation-cefrlevel-${index}`}>Nivel CEFR:</label>
+                <input
+                  id={`translation-cefrlevel-${index}`}
+                  type="text"
+                  value={translation.cefrLevel}
+                  onChange={(event) => handleTranslationChange(index, 'cefrLevel', event.target.value)}
                   required
                 />
               </div>
