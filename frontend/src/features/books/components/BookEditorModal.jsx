@@ -42,7 +42,7 @@ export default function BookEditorModal({
   const addTranslationField = () => {
     setFormData((currentForm) => ({
       ...currentForm,
-      translations: [...currentForm.translations, createEmptyTranslation()],
+      translations: [...currentForm.translations, { ...createEmptyTranslation(), formId: `new-${Date.now()}`}, ],
     }));
   };
 
@@ -99,8 +99,8 @@ export default function BookEditorModal({
             <label htmlFor="book-publishedDate">Fecha de Publicación:</label>
             <input
               id="book-publishedDate"
-              type="text"
-              name="published Date"
+              type="date"
+              name="publishedDate"
               value={formData.publishedDate}
               onChange={handleFieldChange}
               required
@@ -123,7 +123,7 @@ export default function BookEditorModal({
           <h3>Traducciones</h3>
 
           {formData.translations.map((translation, index) => (
-            <div key={`${translation.languageCode}-${index}`} className="translation-block">
+            <div key={`${translation.languageCode}-${translation.formId}`} className="translation-block">
               <h4>Idioma #{index + 1}</h4>
 
               <div className="form-group">
