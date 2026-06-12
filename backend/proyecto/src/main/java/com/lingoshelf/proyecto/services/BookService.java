@@ -11,6 +11,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.lingoshelf.proyecto.dto.BookRequest;
 import com.lingoshelf.proyecto.dto.BookResponse;
+import com.lingoshelf.proyecto.dto.TranslationResponse;
 import com.lingoshelf.proyecto.entity.Book;
 import com.lingoshelf.proyecto.entity.BookTranslation;
 import com.lingoshelf.proyecto.repository.BookRepository;
@@ -23,18 +24,23 @@ public class BookService {
         this.bookRepository = bookRepository;
     }
 
+    @Transactional(readOnly = true)
+    public List<BookResponse> findAllBooks() {
+        List<Book> books = bookRepository.findAll();
+
+        return books.stream()
+            .map(this::toBookResponse)
+            .filter(java.util.Objects::nonNull)
+            .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public List<BookResponse> searchBooks(String title, String lang) {
         List<Book> books = bookRepository.findByTitleInAnyLanguage(title);
-
-        return books.stream().map(b -> {
-            List<BookTranslation> translations = b.getTranslations();
-            BookTranslation trans = translations.stream()
-                    .filter(t -> lang != null && lang.equals(t.getLanguageCode()))
-                    .findFirst()
-                    .orElse(translations.get(0));
-
-            return new BookResponse(b.getId(), trans.getTitle(), trans.getDescription(), b.getPrice());
-        }).collect(Collectors.toList());
+        return books.stream()
+            .map(this::toBookResponse)
+            .filter(java.util.Objects::nonNull)
+            .collect(Collectors.toList());
     }
 
     @Transactional
@@ -61,6 +67,7 @@ public class BookService {
         return toBookResponse(updatedBook);
     }
 
+    @Transactional(readOnly = true)
     public Book getById(Long id) {
         return bookRepository.findById(id).orElse(null);
     }
@@ -96,6 +103,10 @@ public class BookService {
                 return translation;
             })
             .collect(Collectors.toList());
+
+        if (book.getTranslations() != null) {
+            book.getTranslations().clear();
+        }
         book.getTranslations().addAll(newTranslations);
     }
 
@@ -103,11 +114,23 @@ public class BookService {
         if (book.getTranslations() == null | book.getTranslations().isEmpty())
             return null;
 
+        List<TranslationResponse> translationDTOs = book.getTranslations().stream()
+            .map(t -> new TranslationResponse(
+                t.getLanguageCode(),
+                t.getTitle(),
+                t.getDescription(),
+                t.getCefrLevel()
+            ))
+            .collect(Collectors.toList());
+
         return new BookResponse(
             book.getId(),
-            book.getTranslations().get(0).getTitle(),
-            book.getTranslations().get(0).getDescription(),
-            book.getPrice()
+            book.getIsbn(),
+            book.getAuthor(),
+            book.getCategory(),
+            book.getPrice(),
+            book.getPublishedDate(),
+            translationDTOs
         );
     }
 }

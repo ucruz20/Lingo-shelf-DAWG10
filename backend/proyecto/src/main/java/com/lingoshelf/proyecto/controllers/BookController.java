@@ -38,6 +38,15 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping
+    @Operation(summary = "Obtener todos los libros", description = "Devuelve la lista completa de libros registrados.")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista de libros cargada correctamente")
+    })
+    public ResponseEntity<List<BookResponse>> getAllBooks() {
+        return ResponseEntity.ok(bookService.findAllBooks());
+    }
+
     @GetMapping("/search")
     @Operation(
         summary = "Buscar libros por titulo",
