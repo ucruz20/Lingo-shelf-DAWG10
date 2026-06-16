@@ -1,7 +1,6 @@
 import BookEditorModal from '../components/BookEditorModal.jsx';
 import BookList from '../components/BookList.jsx';
 import BookToolbar from '../components/BookToolbar.jsx';
-import { MOCK_BOOKS } from '../data/mockBooks.js';
 import { useBookSearch } from '../hooks/useBookSearch.js';
 import { useBooks } from '../hooks/useBooks.js';
 import '../styles/books.css';
@@ -17,7 +16,7 @@ export default function BooksPage() {
     openEditBook,
     saveBook,
     selectedBook,
-  } = useBooks(MOCK_BOOKS);
+  } = useBooks();
 
   const {
     clearSearch,

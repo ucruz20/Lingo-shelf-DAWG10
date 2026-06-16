@@ -137,6 +137,11 @@
 
 .form-group label {
   font-weight: bold;
+  align-self: center;
+}
+
+.form-group .description-label {
+  align-self: flex-start;
 }
 
 .form-group input,

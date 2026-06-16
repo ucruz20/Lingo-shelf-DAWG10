@@ -1,11 +1,63 @@
 services:
+  database:
+    image: postgres:latest
+    container_name: lingo_db
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: lingoshelf
+    ports:
+      - "5432:5432"
+    volumes:
+      - lingo_pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 3s
+      timeout: 3s
+      retries: 5
+    networks:
+      - lingo_network
+
+  backend:
+    build:
+      context: ./backend/proyecto
+      dockerfile: Dockerfile
+    container_name: lingo_back
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://database:5432/lingoshelf
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=1234
+    depends_on:
+      database:
+        condition: service_healthy
+    networks:
+      - lingo_network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      target: production
+    container_name: lingo_front
+    restart: always
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - lingo_network
+
   frontend-dev:
     build:
       context: ./frontend
       dockerfile: Dockerfile
       target: development
     ports:
-      - 5173:5173
+      - "5173:5173"
     develop:
       watch:
         - action: sync
@@ -14,3 +66,10 @@ services:
           ignore:
             - node_modules
     profiles: [front-dev]
+
+volumes:
+  lingo_pgdata:
+
+networks:
+  lingo_network:
+    driver: bridge
