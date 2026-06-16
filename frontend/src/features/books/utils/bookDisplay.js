@@ -1,7 +1,7 @@
 export function getBookDisplayTitle(book) {
   const translatedTitle = book.translations?.find((translation) => translation.title)?.title;
 
-  return translatedTitle || book.title || 'Sin titulo';
+  return translatedTitle || 'Sin titulo';
 }
 
 export function formatBookPrice(price) {

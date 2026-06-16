@@ -3,6 +3,7 @@ export function createEmptyTranslation() {
     languageCode: '',
     title: '',
     description: '',
+    cefrLevel: '',
   };
 }
 
@@ -10,9 +11,9 @@ export function createEmptyBookForm() {
   return {
     isbn: '',
     price: '',
-    mcer: '',
+    author: '',
     category: '',
-    title: '',
+    publishedDate: '',
     translations: [createEmptyTranslation()],
   };
 }
@@ -35,13 +36,14 @@ export function normalizeBookForm(formData) {
     ...formData,
     isbn: formData.isbn.trim(),
     price: Number.isNaN(price) ? 0 : price,
-    mcer: formData.mcer.trim(),
+    author: formData.author.trim(),
     category: formData.category.trim(),
-    title: formData.title.trim(),
+    publishedDate: formData.publishedDate.trim(),
     translations: formData.translations.map((translation) => ({
       languageCode: translation.languageCode.trim(),
       title: translation.title.trim(),
       description: translation.description.trim(),
+      cefrLevel: translation.cefrLevel.trim(),
     })),
   };
 }

@@ -6,7 +6,7 @@ export function bookMatchesSearch(book, searchTerm) {
   if (!normalizedSearch) return true;
 
   const searchableValues = [
-    book.title,
+    book.author,
     book.isbn,
     book.category,
     ...(book.translations ?? []).flatMap((translation) => [
