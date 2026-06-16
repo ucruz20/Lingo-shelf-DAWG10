@@ -1,5 +1,10 @@
+function createFormId() {
+  return `translation-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+}
+
 export function createEmptyTranslation() {
   return {
+    formId: createFormId(),
     languageCode: '',
     title: '',
     description: '',
@@ -21,10 +26,16 @@ export function createEmptyBookForm() {
 export function cloneBookForForm(book) {
   return {
     ...createEmptyBookForm(),
-    ...book,
+    isbn: book.isbn ?? '',
     price: book.price ?? '',
+    author: book.author ?? '',
+    category: book.category ?? '',
+    publishedDate: book.publishedDate ?? '',
     translations: book.translations?.length
-      ? book.translations.map((translation) => ({ ...translation }))
+      ? book.translations.map((translation) => ({
+          ...translation,
+          formId: translation.formId ?? createFormId(),
+        }))
       : [createEmptyTranslation()],
   };
 }
@@ -33,7 +44,6 @@ export function normalizeBookForm(formData) {
   const price = Number.parseFloat(formData.price);
 
   return {
-    ...formData,
     isbn: formData.isbn.trim(),
     price: Number.isNaN(price) ? 0 : price,
     author: formData.author.trim(),
