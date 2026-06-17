@@ -9,3 +9,7 @@
 | 3 | Kennet Alonso Castro Siguenza | CS24010 |
 | 4 | Pablo Daniel Hurtado Cortez   | HC24019 |
 | 5 | Edwin Ulises Cruz Grijalva    | CG21038 |
+
+
+## Diagrama Entidad-Relacion
+![Diagrama ER](./diagramaER.jpeg)
