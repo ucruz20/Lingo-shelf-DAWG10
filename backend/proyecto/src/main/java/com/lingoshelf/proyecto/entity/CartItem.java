@@ -1,6 +1,5 @@
 package com.lingoshelf.proyecto.entity;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,25 +16,18 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookTranslation {
+public class CartItem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
     @JoinColumn(name = "book_id")
     private Book book;
 
-    @Column(length = 500)
-    private String title;
-    
-    @Column(length = 4000)
-    private String description;
-
-    @Column(name = "language_code", length = 10)
-    private String languageCode;    //"es", "en", "fr"
-
-    @Column(name = "cefr_level", length = 2)
-    private String cefrLevel;
+    private Integer quantity;
 }
-

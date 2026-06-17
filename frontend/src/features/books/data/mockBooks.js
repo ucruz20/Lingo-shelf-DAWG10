@@ -1,0 +1,128 @@
+export const MOCK_BOOKS = [
+  {
+    id: 1,
+    isbn: '9780060929794',
+    price: 19.99,
+    author: 'Gabriel Garcia Marquez',
+    category: 'Novela',
+    publishedDate: '1967-06-05',
+    popularity: 96,
+    translations: [
+      {
+        languageCode: 'es',
+        title: 'Cien anos de soledad',
+        description: 'Una lectura esencial para estudiantes avanzados de espanol literario.',
+        cefrLevel: 'B2',
+      },
+      {
+        languageCode: 'en',
+        title: 'One Hundred Years of Solitude',
+        description: 'English translation for guided comparison and vocabulary practice.',
+        cefrLevel: 'C1',
+      },
+    ],
+  },
+  {
+    id: 2,
+    isbn: '9780142437230',
+    price: 14.5,
+    author: 'Miguel de Cervantes Saavedra',
+    category: 'Clasico',
+    publishedDate: '1605-01-16',
+    popularity: 88,
+    translations: [
+      {
+        languageCode: 'es',
+        title: 'Don Quijote de la Mancha',
+        description: 'Las aventuras del ingenioso hidalgo.',
+        cefrLevel: 'C1',
+      },
+    ],
+  },
+  {
+    id: 3,
+    isbn: '9780156012195',
+    price: 12.75,
+    author: 'Antoine de Saint-Exupery',
+    category: 'Obra original',
+    publishedDate: '1943-04-06',
+    popularity: 91,
+    translations: [
+      {
+        languageCode: 'fr',
+        title: 'Le Petit Prince',
+        description: 'Texto breve en frances con vocabulario accesible y lectura guiada.',
+        cefrLevel: 'A2',
+      },
+      {
+        languageCode: 'es',
+        title: 'El Principito',
+        description: 'Traduccion en espanol para lectura paralela.',
+        cefrLevel: 'B1',
+      },
+    ],
+  },
+  {
+    id: 4,
+    isbn: '9781108457651',
+    price: 28.9,
+    author: 'Raymond Murphy',
+    category: 'Material didactico',
+    publishedDate: '2019-01-24',
+    popularity: 84,
+    translations: [
+      {
+        languageCode: 'en',
+        title: 'English Grammar in Use',
+        description: 'Libro de practica gramatical para estudiantes independientes.',
+        cefrLevel: 'B1',
+      },
+    ],
+  },
+  {
+    id: 5,
+    isbn: '9784805314685',
+    price: 17.25,
+    author: 'Michael Emmerich',
+    category: 'Lecturas graduadas',
+    publishedDate: '2018-10-16',
+    popularity: 79,
+    translations: [
+      {
+        languageCode: 'ja',
+        title: 'Japanese Stories for Language Learners',
+        description: 'Relatos bilingues con notas culturales y apoyo de vocabulario.',
+        cefrLevel: 'A2',
+      },
+      {
+        languageCode: 'en',
+        title: 'Japanese Stories for Language Learners',
+        description: 'Parallel English support for reading practice.',
+        cefrLevel: 'B1',
+      },
+    ],
+  },
+  {
+    id: 6,
+    isbn: '9780593189641',
+    price: 22.0,
+    author: 'James Clear',
+    category: 'Audiolibro',
+    publishedDate: '2018-10-16',
+    popularity: 74,
+    translations: [
+      {
+        languageCode: 'en',
+        title: 'Atomic Habits Audiobook',
+        description: 'Audiolibro para entrenar escucha activa y vocabulario cotidiano.',
+        cefrLevel: 'B2',
+      },
+      {
+        languageCode: 'es',
+        title: 'Habitos atomicos',
+        description: 'Version en espanol para reforzar comprension y comparacion de ideas.',
+        cefrLevel: 'B2',
+      },
+    ],
+  },
+];
