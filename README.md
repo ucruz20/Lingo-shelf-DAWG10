@@ -10,6 +10,9 @@
 | 4 | Pablo Daniel Hurtado Cortez   | HC24019 |
 | 5 | Edwin Ulises Cruz Grijalva    | CG21038 |
 
+
+## Diagrama Entidad-Relacion
+![Diagrama ER](./diagramaER.jpeg)
 ## Desarrollo
 
 Utilizar el siguiente comando para correr el frontend con docker
@@ -38,3 +41,4 @@ Lingo Shelf es una aplicación e-commerce de nicho diseñada específicamente pa
 -Lista de deseos(Wishlist): permite a los clientes guardar libros de su interes para comprarlos en el futuro
 
 -Carrito de compras: Gestiona el estado de los productos seleccionados (agregar, quitar o modificar cantidades) antes de procesar el pago o cierre de la compra
+![Diagrama ER](./diagramaER.jpeg)
